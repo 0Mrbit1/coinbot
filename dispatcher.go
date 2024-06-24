@@ -44,6 +44,10 @@ func main() {
 	dispatcher.AddHandler(handlers.NewCommand("utility", utility))
 	dispatcher.AddHandler(handlers.NewCallback(callbackquery.Equal("data_refresh"), startCB))
 
+	go handleMessageDeletions(b)
+
+
+
 	err = updater.StartPolling(b, &ext.PollingOpts{
 		DropPendingUpdates: true,
 		GetUpdatesOpts: &gotgbot.GetUpdatesOpts{
